@@ -11,6 +11,8 @@ reqID = ['byr', 'iyr', 'eyr', 'hgt', 'hcl', 'ecl', 'pid']
 def countValid():
 
     i = 0
+    tracker = 0
+    counter = 0
     count = len(passports)
 
     while i < count:
@@ -20,15 +22,27 @@ def countValid():
         if current == '':
             tracker = 0
             
-        lineSplit = current.split(':')
+        else: 
+            lineSplit = current.split(':')
 
-        tracker = 0
+            j = 0
+            while j < len(lineSplit):
 
-        j = 0
-        while j < len(lineSplit):
+                req = lineSplit[j]
+                if req in reqID:
+                    tracker += 1
 
-            req = lineSplit[j]
-            if req in reqID:
-                tracker += 1
+                j += 2
+                
+        if tracker >= 7:
+            counter += 1
+            tracker = 0
+        
+        i++
+        
+        
+    return counter
+    
+print(countValid())
 
-            j += 2
+
